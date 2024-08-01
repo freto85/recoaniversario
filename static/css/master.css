@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto&display=swap');
+
+html {
+    height: 100%;
+}
+  
+  
+* {
+box-sizing: border-box;
+}
+  
+  
+body {
+    display: grid;
+    grid-template-rows: auto fit-content(8rem);
+    grid-template-areas: "main"
+                            "footer";
+    padding-top: 0;
+    height: 100%;
+    margin: 0;
+}
+
+  
+main {
+    grid-area: main;
+    margin-top: 0;
+    background:  url("/static/images/background-placeholder.jpg") 50% 0 repeat fixed;
+}  
+
+.main-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.3rem;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgb(34, 33, 33);
+    position: sticky;
+    z-index: 30;
+}
+  
+.main-nav {
+    display: grid;
+    grid-template-columns: repeat(24,1fr);
+    grid-template-areas: "header two three four five six seven eight nine ten eleven signup login twelve thirteen nineteen twenty twentyone userinfo userinfo userinfo userinfo logout twentyfour";
+    width: 100%;
+    z-index: 30;
+  }
+  
+.main-nav__brand-icon {
+    display: none;
+}
+  
+  
+.main-nav__brand-icon img {
+    display: flex;
+    width: 6rem;
+    height: 6rem;
+    border: 5px outset #575656;
+    border-radius: 50%;
+    background-color: rgb(56, 56, 56);
+    margin-top: 0rem;
+    z-index: 2;
+}
+.main-nav__brand-icon img:hover,
+.main-nav__brand-icon img:active {
+    outline: auto;
+}
+
+.bigtext-container {
+    display:flex;
+    font-family: inherit;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    border: 0;
+}
+  
+  
+.bigtext-title {
+    display: flex;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    background-color: #363636;
+    color: #fafcee;
+    border: 1px inset #2a2a2b;
+    padding: 1rem 0 1rem 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px #353434;
+}  
+  
+.main-footer {
+    display: grid;
+    grid-area: footer;
+    background: black;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: 'Lato', sans-serif;
+    bottom: 0;
+    width: 100%;
+    z-index: 30;
+}
+
+.main-footer__links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.616);
+
+}
+  
+  
+.main-footer__item {
+    padding: 0.2rem 0;
+    font-size: 0.8rem;
+}
+
+  
+.main-footer__item:hover,
+.main-footer__item:active {
+    color: white;
+    text-decoration: none;
+}
+  
+main {
+    grid-area: main;
+    margin-top: 0;
+    background:  url("/static/images/base/background.webp") 50% 0 repeat fixed;
+  }
+  
+
+@media (min-width:40rem) {
+    .main-nav {
+        display: grid;
+        grid-template-columns: repeat(24,1fr);
+        grid-template-areas: "header two three four five admin admin grade grade message message school school special special logout logout userinfo userinfo userinfo userinfo userinfo userinfo twentythree twentyfour";
+        width: 100%;
+        z-index: 30;
+    }
+    
+    .main-nav__brand-icon {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        grid-area: header;
+        position: absolute;
+    }
+    
+    
+    
+    .main-nav__brand-icon img {
+        display: flex;
+        width: 6rem;
+        height: 6rem;
+        border: 5px outset #575656;
+        border-radius: 50%;
+        background-color: rgb(56, 56, 56);
+        margin-top: 0rem;
+        z-index: 2;
+      }
+    .main-nav__brand-icon img:hover,
+    .main-nav__brand-icon img:active {
+        outline: auto;
+    }
+    
+}
+  

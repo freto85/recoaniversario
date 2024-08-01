@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/root/homepage.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="bigtext-container">
+        <h1 class='bigtext-title'>Marcha por Buenos Aires</h1>
+    </div>
+    <div class="grid-container">
+        <h1 class="grid-title">Placeholder</h1>
+        <div class="image-container">
+            <img src="{% static 'images/homepage/placeholder.png' %}" alt="" placeholder="hola">
+        </div>
+        <div class="buttons-container">
+            <a href="{% url 'musica:musica_start' %}">Comenzar</a>
+            <a href="#"><span class="fa-solid fa-house"></span></a>
+        </div>
+       
+    </div>
+{% endblock %}
