@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Patua+One&family=Sancreek&family=Trirong:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+    height: 100%;
+}
+  
+  
+* {
+box-sizing: border-box;
+}
+  
+  
+body {
+    display: grid;
+    grid-template-rows: auto fit-content(8rem);
+    grid-template-areas: "main"
+                            "footer";
+    padding-top: 0;
+    height: 100%;
+    margin: 0;
+}
+
+  
+main {
+    grid-area: main;
+    margin-top: 0;
+    background:  url("/static/images/background-placeholder.jpg") 50% 0 repeat fixed;
+}  
+
+.main-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgb(34, 33, 33);
+    position: sticky;
+    z-index: 30;
+}
+  
+.main-nav {
+    display: grid;
+    grid-template-columns: repeat(24,1fr);
+    grid-template-areas: "header two three four five six seven eight nine ten eleven signup login twelve thirteen nineteen twenty twentyone admin admin admin logout logout logout";
+    width: 100%;
+    z-index: 30;
+  }
+  
+.main-nav__brand-icon {
+    display: none;
+}
+  
+.main-nav__brand-icon img {
+    display: flex;
+    width: 6rem;
+    height: 6rem;
+    border: 5px outset #575656;
+    border-radius: 50%;
+    background-color: rgb(56, 56, 56);
+    margin-top: 0rem;
+    z-index: 2;
+}
+.main-nav__brand-icon img:hover,
+.main-nav__brand-icon img:active {
+    outline: auto;
+}
+
+.bigtext-container {
+    display:flex;
+    font-family: inherit;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    border: 0;
+}
+  
+  
+.bigtext-title {
+    display: flex;
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 900;
+    background-color: #741e1e;
+    color: #fafcee;
+    border: 1px inset #2a2a2b;
+    padding: 1rem 0 1rem 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    text-shadow: 2px 2px #353434;
+}  
+  
+.main-footer {
+    display: grid;
+    grid-area: footer;
+    background: black;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: 'Lato', sans-serif;
+    bottom: 0;
+    width: 100%;
+    z-index: 30;
+}
+
+.main-footer__links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.616);
+}
+    
+.main-footer__item {
+    padding: 0.2rem 0;
+    font-size: 0.8rem;
+}
+  
+.main-footer__item:hover,
+.main-footer__item:active {
+    color: white;
+    text-decoration: none;
+}
+  
+main {
+    grid-area: main;
+    margin-top: 0;
+    background:  url("/static/images/base/background.webp") 50% 0 repeat fixed;
+  }
+  
+.nav-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-area: logout;
+    text-shadow: 2px 2px #353434;
+    background-color: #950000;
+    color: #e3e1e1;
+    height: 4rem;
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+.nav-button:hover,
+.nav-button:active {
+    text-decoration: none;
+}
+
+
+.nav-admin {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-area: admin;
+    text-shadow: 2px 2px #353434;
+    background-color: #b8c713;
+    color: #f7ef58;
+    height: 4rem;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+.nav-bar__logout {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-area: logout;
+    text-shadow: 2px 2px #353434;
+    background-color: #a61717;
+    color: #e3e1e1;
+}
+
+@media (min-width:40rem) {  
+    .main-nav__brand-icon {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        grid-area: header;
+        position: absolute;
+    }
+    .nav-button {
+        font-size: 2rem;
+    }
+    
+    
+    
+    .main-nav__brand-icon img {
+        display: flex;
+        width: 6rem;
+        height: 6rem;
+        border: 5px outset #575656;
+        border-radius: 50%;
+        background-color: rgb(56, 56, 56);
+        margin-top: 0rem;
+        z-index: 2;
+      }
+    .main-nav__brand-icon img:hover,
+    .main-nav__brand-icon img:active {
+        outline: auto;
+    }
+    
+}
+  

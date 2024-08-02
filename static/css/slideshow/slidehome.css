@@ -1,0 +1,131 @@
+.grid-container {
+    display: grid;
+    width: 95%;
+    justify-content: center;
+    background-color: rgb(168, 156, 135);
+    margin: 1rem auto 0.5rem auto;
+    grid-template-columns: repeat(12,1fr);
+    box-shadow: 3px 3px 5px 3px rgba(0,0,0,0.3);
+}
+
+.grid-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    color: white;
+    margin: 0rem auto 0.5rem auto;
+    background-color: #5a1a1a;
+    font-family: "Trirong", serif;
+    height: 100%;
+    text-shadow: 2px 2px #353434;
+    grid-column: span 12;
+}
+
+.grid-title__container {
+    display: flex;
+    width: 100%;
+    grid-column: span 12;
+}
+
+.grid-title__button {
+    display: flex;
+    width: 15%;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: #7e1313;
+    color: rgb(217, 217, 217);
+    border: 2px outset black;
+    padding: 0.5rem 0;
+    text-shadow: 2px 2px #353434;
+}
+
+.image-container {
+    display: flex;
+    grid-column: span 12;
+    width: 95%;
+    margin: 0.5rem auto;
+    justify-content: center;
+    align-items: center;
+    border: 5px inset rgb(104, 104, 104);
+}
+
+.image-container img {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons-container {
+    display: flex;
+    width: 95%;
+    justify-content: space-around;
+    align-items: center;
+    grid-column: span 12;
+    margin: 0 auto;
+}
+.buttons-container a {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    margin: 0.5rem auto 1rem auto;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: rgb(86, 45, 45);
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+    padding: 0.5rem;
+    height: 3.5rem;
+    color: rgb(205, 205, 205);
+    font-family: "Patua One", serif;
+    text-shadow: 2px 2px #353434;
+}
+
+.buttons-container a:hover,
+.butttons-container a:active {
+    background-color: rgb(86, 45, 45);
+    color: rgb(205, 205, 205);
+    text-decoration: none;
+}
+
+.row-container {
+    display: flex;
+    width: 100%;
+    grid-column: span 12;
+    height: 40px;
+    background: linear-gradient(45deg, #6a5135, #5c341d);
+    background: -webkit-radial-gradient(45deg, #C69C6D, #754224);
+    background: -moz-radial-gradient(45deg, #C69C6D, #754224);
+    background: -o-radial-gradient(45deg, #C69C6D, #754224);    
+    border: 3px outset rgb(73, 73, 73);
+}
+
+@media (min-width: 40rem) {
+    .flex-container,
+    .grid-container {
+        width: 60%;
+    }
+
+    .flex-title {
+        font-size: 1.7rem;
+    }
+
+    .buttons-container {
+        width: 60%;
+    }
+}
+
+@media (min-width: 80rem) {
+    .flex-container,
+    .grid-container {
+        width: 40%;
+    }
+
+    .buttons-container {
+        width: 40%;
+    }
+}

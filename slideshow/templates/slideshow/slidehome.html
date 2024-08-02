@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/slideshow/slidehome.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="grid-container">
+        <div class="row-container"></div>
+        <div class="image-container">
+            <img src="{% static 'images/homepage/placeholder.png' %}" alt="" placeholder="hola">
+        </div>
+        <div class="grid-title__container">
+            <button class="grid-title__button"><span class="fa-solid fa-chevron-left"></span></button>
+            <h1 class="grid-title">Placeholder</h1>
+            <button class="grid-title__button"><span class="fa-solid fa-chevron-right"></span></button>
+        </div>
+    </div>
+    <div class="buttons-container">
+        {% if get_user.is_superuser %}
+            <a href="{% url 'musica:musica_start' %}"><span class="fa-solid fa-plus"></span></a>
+        {% endif %}
+        <a href="{% url 'homepage' %}"><span class="fa-solid fa-house"></span></a>
+    </div>
+{% endblock %}

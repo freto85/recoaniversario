@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/root/homepage.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="bigtext-container">
+        <h1 class='bigtext-title'>Marcha por Buenos Aires</h1>
+    </div>
+    {% if get_user.is_authenticated %}
+        <div class="grid-container">
+            <div class="grid-title">Menú Principal</div>
+            <a class="menu-button" href="{% url 'slideshow:slidehome' %}">Introducción</a>
+            <a class="menu-button" href="{% url 'musica:musica_start' %}">Actividad</a>
+            {% if get_user.is_superuser %}
+                <a class="admin-button" href="{% url 'slideshow:create_slideshow' %}">Crear Diapositivas</a>
+                <a class="admin-button" href="{% url 'musica:create_audio_quiz' %}">Crear Quiz de Audio</a>
+            {% endif %}
+        </div>
+    {% else %}
+    <div class="flex-container">
+        <form class="flex-login" method="POST">
+            {% csrf_token %}
+            <p class="flex-title dark-colorset__one">Acceso a la cuenta</p>
+            <label class="login-input__label" for="login-username">Nombre de Usuario</label>
+            <input class="login-field" type="text" name="login-username" id="login-username">
+            <label class="login-input__label" for="login-password">Contraseña</label>
+            <input class="login-field" type="password" name="login-password" id="login-password">
+            <button class="login-button" type="submit">Acceder</button>
+        </form>
+      </div>
+    {% endif %}
+   
+{% endblock %}

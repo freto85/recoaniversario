@@ -1,0 +1,76 @@
+
+form {
+    display: flex;
+    width: 95%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem auto;
+    flex-direction: column;
+    background-color: rgb(168, 156, 135);
+}
+
+form div {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+label {
+    color: white;
+    display: flex;
+    width: 95%;
+    margin: 0.2rem auto 0 auto;
+    padding: 0.2rem 0;
+    font-size: 1.1rem;
+    font-family: "Trirong", serif;
+}
+
+input {
+    display: flex;
+    width: 95%;
+    margin: 0.3rem auto;
+    padding: 0.2rem 0.5rem;
+}
+
+.buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.buttons-container a,
+.buttons-container button {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    margin: 0.5rem auto 1rem auto;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: rgb(86, 45, 45);
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+    padding: 0.5rem;
+    height: 3.5rem;
+    color: rgb(205, 205, 205);
+    font-family: "Patua One", serif;
+    text-shadow: 2px 2px #353434;
+}
+
+.form-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 12;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    border: 3px outset grey;
+    text-shadow: 2px 2px #353434;
+    background-color: rgb(90, 26, 26);
+    color: white;
+    font-family: "Trirong", serif;
+    font-weight: bold;
+}
