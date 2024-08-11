@@ -39,54 +39,30 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: white;
-    margin: 0rem auto 0.5rem auto;
+    margin: 0rem auto 0.3rem auto;
     background-color: #5a1a1a;
     font-family: "Trirong", serif;
     height: 100%;
     text-shadow: 2px 2px #353434;
     grid-column: span 12;
+    border-bottom: 5px ridge black;
 }
 
-.menu-button {
+.grid-subtitle {
     display: flex;
-    width: 95%;
-    margin: 1rem auto;
-    grid-column: span 12;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    border: 3px outset black;
-    background-color: #752828;
-    color: #e3b1b1;
-    text-decoration: none;
-    border-radius: 3px;
-    font-size: 1.3rem;
-    font-family: "Trirong", serif;
-}
-
-.menu-button:hover,
-.menu-button:active {
-    text-decoration: none;
-    background-color: #963434;
-    color: #f6d1d1;
-}
-
-.menu-button {
-    display: flex;
-    width: 95%;
-    margin: 1rem auto;
-    grid-column: span 12;
-    justify-content: center;
-    align-items: center;
-    border: 3px outset black;
-    background-color: #752828;
-    color: #e3b1b1;
-    text-decoration: none;
-    border-radius: 3px;
-    font-size: 1.3rem;
-    font-family: "Trirong", serif;
+    font-size: 1.5rem;
+    color: white;
+    margin: 0.2rem auto 0rem auto;
+    background-color: #884545;
+    font-family: "Cinzel Decorative", serif;
     text-shadow: 2px 2px #353434;
+    grid-column: span 12;
+    font-weight: bold;
 }
 
 .menu-button:hover,
@@ -95,11 +71,88 @@
     background-color: #963434;
     color: #f6d1d1;
 }
+
+.menu-button {
+    display: flex;
+    width: 95%;
+    margin: 0.2rem auto;
+    grid-column: span 12;
+    justify-content: center;
+    align-items: center;
+    border: 3px outset black;
+    background-color: #4d4c4c;
+    color: #cfcfcf;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    font-family: "Trirong", serif;
+    text-shadow: 1px 1px #353434;
+    text-align: center;
+}
+
+.menu-button:hover,
+.menu-button:active {
+    text-decoration: none;
+    background-color: #706f6f;
+    color: white;
+}
+
+.admin-menu__container {
+    display: grid;
+    width: 95%;
+    grid-template-columns: repeat(12,1fr);
+    justify-content: center;
+    grid-column: span 12;
+    margin: 0.2rem auto;
+    border: 3px outset black;
+}
+
+.admin-menu__button {
+    display: flex;
+    width: 100%;
+    grid-column: span 10;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: #4d4c4c;
+    color: #cfcfcf;
+    text-decoration: none;
+    font-family: "Trirong", serif;
+    text-shadow: 1px 1px #353434;
+    text-align: center;
+}
+
+.admin-edit__button {
+    display: flex;
+    width: 100%;
+    grid-column: span 1;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(3, 105, 3);
+    color: rgb(216, 216, 216);
+    text-decoration: none;
+    text-shadow: 1px 1px #353434;
+    font-size: 1.2rem;
+}
+
+.admin-remove__button {
+    display: flex;
+    width: 100%;
+    grid-column: span 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #a90505;
+    color: rgb(216, 216, 216);
+    text-decoration: none;
+    text-shadow: 1px 1px #353434;
+    font-size: 1.2rem;
+}
+
 
 .admin-button {
     display: flex;
     width: 95%;
-    margin: 1rem auto;
+    margin: 0.2rem auto;
     grid-column: span 12;
     justify-content: center;
     align-items: center;
@@ -247,21 +300,60 @@
 @media (min-width: 40rem) {
     .flex-container,
     .grid-container {
-        width: 60%;
+        width: 55%;
     }
 
     .flex-title {
         font-size: 1.7rem;
     }
 
+    .grid-title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .grid-subtitle {
+        font-size: 1.5rem;
+    }
+    .menu-button,
+    .admin-button {
+        font-size: 1.3rem;
+    }
+    
+    .admin-menu__button {
+        font-size: 1.3rem;
+        text-shadow: 2px 2px #353434;
+    }
+    
+    .admin-edit__button {
+        font-size: 1.6rem;
+        text-shadow: 2px 2px #353434;
+    }
+    
+    .admin-remove__button {
+        font-size: 1.6rem;
+        text-shadow: 2px 2px #353434;
+    }
+    
     .buttons-container {
         width: 60%;
     }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 90rem) {
     .flex-container,
     .grid-container {
         width: 40%;
+    }
+    
+    .grid-title {
+        font-size: 2.2rem;
+        font-weight: bold;
+    }
+    .grid-subtitle {
+        font-size: 1.8rem;
+    }
+    .menu-button,
+    .admin-button {
+        font-size: 1.5rem;
     }
 }

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load embed_video_tags %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/video/video_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="grid-container">
+        {% if get_video.video_file %}
+            <div class='title-container library-subject__two'>
+                <span class="title-icon fab fa-youtube"></span> 
+                <h1 class="title-text">{{ get_video.title }}</h1>
+            </div>
+            <div class="video-container">
+                <iframe  src="{{ get_video.video_file.url }}" frameborder="0" allow="fullscreen"></iframe>
+            </div>
+            <div class="info-container general-grade__three">
+
+                <div class='description-container'>  
+                <p class='description-paragraph'><span class="icon-size fas fa-info-circle"></span> {{ get_video.description|safe|linebreaksbr }}</p>
+                </div>
+            </div>
+        {% else %}
+            {% video get_video.video_url as video_url %}
+                <div class='title-container library-subject__two'>
+                    <span class="title-icon fab fa-youtube"></span> 
+                    <h1 class="title-text">{{ get_video.title }}</h1>
+                </div>
+                <div class="video-container">
+                    <iframe  src="{{ video_url.url }}" frameborder="0" allow="fullscreen"></iframe>
+                </div>
+                <div class="info-container general-grade__three">
+
+                    <div class='description-container'>  
+                    <p class='description-paragraph'><span class="icon-size fas fa-info-circle"></span> {{ get_video.description|safe|linebreaksbr }}</p>
+                    </div>
+                </div>
+            {% endvideo %}
+        {% endif %}
+    </div>
+    <div class="buttons-container">
+        <a class="" type="button" href="{% url 'homepage' %}"><span class="fas fa-arrow-left"></span></a>
+    </div>
+{% endblock %}
+

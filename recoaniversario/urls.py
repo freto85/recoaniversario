@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.homepage, name="homepage"),
     path('accounts/',include(('accounts.urls','accounts'),namespace='accounts')),
-    path('recoaniversario',include(('musica.urls','musica'),namespace='musica')),
-    path('slideshow',include(('slideshow.urls','slideshow'),namespace='slideshow'))
+    path('musica/',include(('musica.urls','musica'),namespace='musica')),
+    path('slideshow',include(('slideshow.urls','slideshow'),namespace='slideshow')),
+    path('video/',include(('video.urls','video'),namespace='video')),
 ]
 
 if settings.DEBUG:

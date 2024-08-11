@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/slideshow/create_slideshow.css' %}">
 {% endblock %}
 
 {% block content %}
-
+    <div class="bigtext-container">
+        <h1 class='bigtext-title'>Crear Álbum</h1>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form get_form %}
+        {{ get_form.media }} 
+        {% buttons %}
+            <div class='buttons-container'>
+                <button type="submit"><span class='fas fa-upload'></span></button>
+                <a href="{% url 'homepage' %}"><span class='fas fa-arrow-left'></span></a>
+            </div>		
+        {% endbuttons %}
+    </form>
 {% endblock %}

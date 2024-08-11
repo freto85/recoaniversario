@@ -7,14 +7,507 @@
 {% endblock %}
 
 {% block content %}
-    <div class="bigtext-container">
-        <h1 class="bigtext-title">Placeholder</h1>
+    <div class="game-instructions" id="game_instructions">
+        <h1 class="instructions-title">¡Encontrá al espía!</h1>
+        <p class="instructions-text">Escuchá las cuatro canciones y elegí la canción que no se compuso en nuestro territorio.</p>
+        <button class="instructions-button" id="instructions_button">Ok</button>
     </div>
+    <div class="backdrop" id="backdrop"></div>
     <div class="grid-container">
-        <h1 class="grid-title">Título</h1>
+        <span class="fa-solid fa-user-secret option-button red-button" id="input_option_1"></span>
+        <span class="fa-solid fa-user-secret option-button blue-button" id="input_option_2"></span>
+        <audio hidden controls id="audio_1">
+            <source src="{{ get_quiz.audio_file_1.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio hidden controls id="audio_2">
+            <source src="{{ get_quiz.audio_file_2.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
         <div class="audio-container">
-            <audio src=""></audio>
+            <button class="play-button" id="play_1"><span class="fa-solid fa-play" id="icon_play_1"></span></button>
+            <button class="volume-button" id="vol_up_1"><span class="fa-solid fa-volume-high"></span></button>
+            <button class="volume-button" id="vol_down_1"><span class="fa-solid fa-volume-low"></span></button>
+        </div>
+        <div class="audio-container">
+            <button class="play-button" id="play_2"><span class="fa-solid fa-play" id="icon_play_2"></span></button>
+            <button class="volume-button" id="vol_up_2"><span class="fa-solid fa-volume-high"></span></button>
+            <button class="volume-button" id="vol_down_2"><span class="fa-solid fa-volume-low"></span></button>
+        </div>
+        <div class="audio-volume__container">
+            <div class="volume-bar volume-bar__active" id="vol_20_1"></div>
+            <div class="volume-bar volume-bar__active" id="vol_40_1"></div>
+            <div class="volume-bar volume-bar__active" id="vol_60_1"></div>
+            <div class="volume-bar volume-bar__active" id="vol_80_1"></div>
+            <div class="volume-bar volume-bar__active" id="vol_100_1"></div>
+        </div>
+        <div class="audio-volume__container">
+            <div class="volume-bar volume-bar__active" id="vol_20_2"></div>
+            <div class="volume-bar volume-bar__active" id="vol_40_2"></div>
+            <div class="volume-bar volume-bar__active" id="vol_60_2"></div>
+            <div class="volume-bar volume-bar__active" id="vol_80_2"></div>
+            <div class="volume-bar volume-bar__active" id="vol_100_2"></div>
+        </div>
+        <div class="audio-separator"></div>
+        <span class="fa-solid fa-user-secret option-button pink-button" id="input_option_3"></span>
+        <span class="fa-solid fa-user-secret option-button brown-button" id="input_option_4"></span>
+        <audio hidden controls id="audio_3">
+            <source src="{{ get_quiz.audio_file_3.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio hidden controls id="audio_4">
+            <source src="{{ get_quiz.audio_file_4.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="audio-container">
+            <button class="play-button" id="play_3"><span class="fa-solid fa-play" id="icon_play_3"></span></button>
+            <button class="volume-button" id="vol_up_3"><span class="fa-solid fa-volume-high"></span></button>
+            <button class="volume-button" id="vol_down_3"><span class="fa-solid fa-volume-low"></span></button>
+        </div>
+        <div class="audio-container">
+            <button class="play-button" id="play_4"><span class="fa-solid fa-play" id="icon_play_4"></span></button>
+            <button class="volume-button" id="vol_up_4"><span class="fa-solid fa-volume-high"></span></button>
+            <button class="volume-button" id="vol_down_4"><span class="fa-solid fa-volume-low"></span></button>
+        </div>
+        <div class="audio-volume__container">
+            <div class="volume-bar volume-bar__active" id="vol_20_3"></div>
+            <div class="volume-bar volume-bar__active" id="vol_40_3"></div>
+            <div class="volume-bar volume-bar__active" id="vol_60_3"></div>
+            <div class="volume-bar volume-bar__active" id="vol_80_3"></div>
+            <div class="volume-bar volume-bar__active" id="vol_100_3"></div>
+        </div>
+        <div class="audio-volume__container">
+            <div class="volume-bar volume-bar__active" id="vol_20_4"></div>
+            <div class="volume-bar volume-bar__active" id="vol_40_4"></div>
+            <div class="volume-bar volume-bar__active" id="vol_60_4"></div>
+            <div class="volume-bar volume-bar__active" id="vol_80_4"></div>
+            <div class="volume-bar volume-bar__active" id="vol_100_4"></div>
         </div>
     </div>
+    <form class="answer-container" action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="music-answer" id="input_option">
+        <div class="buttons-container">
+            <button class="inactive-submit" id="submit_button" role="submit" disabled><span class="fa-solid fa-check"></span></button>
+            <a href="{% url 'homepage' %}"><span class="fa-solid fa-house"></span></a>
+        </div>
+    </form>
+
+
+    <script>
+        var backdrop = document.querySelector('#backdrop');
+        var instructions = document.querySelector('#game_instructions');
+        var instructionsButton = document.querySelector('#instructions_button');
+        instructionsButton.addEventListener('click', function() {
+            backdrop.classList.add('make-invisible');
+            instructions.classList.add('make-invisible');
+        })
+        var playOne = document.querySelector('#play_1');
+        var playIconOne = document.querySelector('#icon_play_1');
+        var audioOne = document.querySelector('#audio_1');
+        var volumeUpOne = document.querySelector('#vol_up_1');
+        var volumeDownOne = document.querySelector('#vol_down_1');
+        var volumeTwentyOne = document.querySelector('#vol_20_1');
+        var volumeFourtyOne = document.querySelector('#vol_40_1');
+        var volumeSixtyOne = document.querySelector('#vol_60_1');
+        var volumeEightyOne = document.querySelector('#vol_80_1');
+        var volumeHundredOne = document.querySelector('#vol_100_1');
+        playOne.addEventListener('click',function() {
+            if (audioOne.paused) {
+                audioOne.play()
+                playIconOne.classList.remove('fa-play');
+                playIconOne.classList.add('fa-pause');
+                playIconTwo.classList.add('fa-play');
+                playIconTwo.classList.remove('fa-pause');
+                playIconThree.classList.add('fa-play');
+                playIconThree.classList.remove('fa-pause');
+                playIconFour.classList.add('fa-play');
+                playIconFour.classList.remove('fa-pause');
+                audioTwo.pause()
+                audioThree.pause()
+                audioFour.pause()
+            } else {
+                audioOne.pause()
+                playIconOne.classList.add('fa-play');
+                playIconOne.classList.remove('fa-pause')
+            }
+        })
+        volumeUpOne.addEventListener('click', function() {
+            if (audioOne.volume < 1) {
+                let audioInstance = Math.round((audioOne.volume + 0.2) * 1e8) / 1e8;
+                audioOne.volume = audioInstance
+            }
+            if (audioOne.volume === 0) {
+                volumeTwentyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.2) {
+                volumeTwentyOne.classList.add('volume-bar__active');
+                volumeFourtyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.4) {
+                volumeFourtyOne.classList.add('volume-bar__active');
+                volumeSixtyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.6) {
+                volumeSixtyOne.classList.add('volume-bar__active');
+                volumeEightyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.8) {
+                volumeEightyOne.classList.add('volume-bar__active');
+                volumeHundredOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 1) {
+                volumeHundredOne.classList.add('volume-bar__active');
+            }
+        })
+        volumeDownOne.addEventListener('click', function() {
+            if (audioOne.volume > 0) {
+                let audioInstance = Math.round((audioOne.volume - 0.2) * 1e8) / 1e8;
+                audioOne.volume = audioInstance
+            }
+            if (audioOne.volume === 0) {
+                volumeTwentyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.2) {
+                volumeTwentyOne.classList.add('volume-bar__active');
+                volumeFourtyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.4) {
+                volumeFourtyOne.classList.add('volume-bar__active');
+                volumeSixtyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.6) {
+                volumeSixtyOne.classList.add('volume-bar__active');
+                volumeEightyOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 0.8) {
+                volumeEightyOne.classList.add('volume-bar__active');
+                volumeHundredOne.classList.remove('volume-bar__active');
+            }
+            else if (audioOne.volume === 1) {
+                volumeHundredOne.classList.add('volume-bar__active');
+            }
+        })
+        audioOne.addEventListener('ended',function() {
+            playIconOne.classList.add('fa-play');
+            playIconOne.classList.remove('fa-pause')
+        })
+        var playTwo = document.querySelector('#play_2');
+        var playIconTwo = document.querySelector('#icon_play_2');
+        var audioTwo = document.querySelector('#audio_2');
+        var volumeUpTwo = document.querySelector('#vol_up_2');
+        var volumeDownTwo = document.querySelector('#vol_down_2');
+        var volumeTwentyTwo = document.querySelector('#vol_20_2');
+        var volumeFourtyTwo = document.querySelector('#vol_40_2');
+        var volumeSixtyTwo = document.querySelector('#vol_60_2');
+        var volumeEightyTwo = document.querySelector('#vol_80_2');
+        var volumeHundredTwo = document.querySelector('#vol_100_2');
+        playTwo.addEventListener('click',function() {
+            if (audioTwo.paused) {
+                audioTwo.play()
+                playIconTwo.classList.remove('fa-play');
+                playIconTwo.classList.add('fa-pause')
+                playIconOne.classList.add('fa-play');
+                playIconOne.classList.remove('fa-pause');
+                playIconThree.classList.add('fa-play');
+                playIconThree.classList.remove('fa-pause');
+                playIconFour.classList.add('fa-play');
+                playIconFour.classList.remove('fa-pause');
+                audioOne.pause()
+                audioThree.pause()
+                audioFour.pause()
+            } else {
+                audioTwo.pause()
+                playIconTwo.classList.add('fa-play');
+                playIconTwo.classList.remove('fa-pause')
+            }
+        })
+        volumeUpTwo.addEventListener('click', function() {
+            if (audioTwo.volume < 1) {
+                let audioInstance = Math.round((audioTwo.volume + 0.2) * 1e8) / 1e8;
+                audioTwo.volume = audioInstance
+            }
+            if (audioTwo.volume === 0) {
+                volumeTwentyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.2) {
+                volumeTwentyTwo.classList.add('volume-bar__active');
+                volumeFourtyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.4) {
+                volumeFourtyTwo.classList.add('volume-bar__active');
+                volumeSixtyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.6) {
+                volumeSixtyTwo.classList.add('volume-bar__active');
+                volumeEightyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.8) {
+                volumeEightyTwo.classList.add('volume-bar__active');
+                volumeHundredTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 1) {
+                volumeHundredTwo.classList.add('volume-bar__active');
+            }
+        }) 
+        volumeDownTwo.addEventListener('click', function() {
+            if (audioTwo.volume > 0) {
+                let audioInstance = Math.round((audioTwo.volume - 0.2) * 1e8) / 1e8;
+                audioTwo.volume = audioInstance
+            }
+            if (audioTwo.volume === 0) {
+                volumeTwentyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.2) {
+                volumeTwentyTwo.classList.add('volume-bar__active');
+                volumeFourtyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.4) {
+                volumeFourtyTwo.classList.add('volume-bar__active');
+                volumeSixtyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.6) {
+                volumeSixtyTwo.classList.add('volume-bar__active');
+                volumeEightyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 0.8) {
+                volumeEightyTwo.classList.add('volume-bar__active');
+                volumeHundredTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioTwo.volume === 1) {
+                volumeHundredTwo.classList.add('volume-bar__active');
+            }
+        })
+        audioTwo.addEventListener('ended',function() {
+            playIconTwo.classList.add('fa-play');
+            playIconTwo.classList.remove('fa-pause')
+        })
+        var playThree = document.querySelector('#play_3');
+        var playIconThree = document.querySelector('#icon_play_3');
+        var audioThree = document.querySelector('#audio_3');
+        var volumeUpThree = document.querySelector('#vol_up_3');
+        var volumeDownThree = document.querySelector('#vol_down_3');
+        var volumeTwentyThree = document.querySelector('#vol_20_3');
+        var volumeFourtyThree = document.querySelector('#vol_40_3');
+        var volumeSixtyThree = document.querySelector('#vol_60_3');
+        var volumeEightyThree = document.querySelector('#vol_80_3');
+        var volumeHundredThree = document.querySelector('#vol_100_3');
+        playThree.addEventListener('click',function() {
+            if (audioThree.paused) {
+                audioThree.play()
+                playIconThree.classList.remove('fa-play');
+                playIconThree.classList.add('fa-pause');
+                playIconOne.classList.add('fa-play');
+                playIconOne.classList.remove('fa-pause');
+                playIconTwo.classList.add('fa-play');
+                playIconTwo.classList.remove('fa-pause');
+                playIconFour.classList.add('fa-play');
+                playIconFour.classList.remove('fa-pause');
+                audioOne.pause()
+                audioTwo.pause()
+                audioFour.pause()
+            } else {
+                audioThree.pause()
+                playIconThree.classList.add('fa-play');
+                playIconThree.classList.remove('fa-pause')
+            }
+        })
+        volumeUpThree.addEventListener('click', function() {
+            if (audioThree.volume < 1) {
+                let audioInstance = Math.round((audioThree.volume + 0.2) * 1e8) / 1e8;
+                audioThree.volume = audioInstance
+            }
+            if (audioThree.volume === 0) {
+                volumeTwentyTwo.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.2) {
+                volumeTwentyThree.classList.add('volume-bar__active');
+                volumeFourtyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.4) {
+                volumeFourtyThree.classList.add('volume-bar__active');
+                volumeSixtyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.6) {
+                volumeSixtyThree.classList.add('volume-bar__active');
+                volumeEightyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.8) {
+                volumeEightyThree.classList.add('volume-bar__active');
+                volumeHundredThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 1) {
+                volumeHundredThree.classList.add('volume-bar__active');
+            }
+        }) 
+        volumeDownThree.addEventListener('click', function() {
+            if (audioThree.volume > 0) {
+                let audioInstance = Math.round((audioThree.volume - 0.2) * 1e8) / 1e8;
+                audioThree.volume = audioInstance
+            }
+            if (audioThree.volume === 0) {
+                volumeTwentyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.2) {
+                volumeTwentyThree.classList.add('volume-bar__active');
+                volumeFourtyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.4) {
+                volumeFourtyThree.classList.add('volume-bar__active');
+                volumeSixtyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.6) {
+                volumeSixtyThree.classList.add('volume-bar__active');
+                volumeEightyThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 0.8) {
+                volumeEightyThree.classList.add('volume-bar__active');
+                volumeHundredThree.classList.remove('volume-bar__active');
+            }
+            else if (audioThree.volume === 1) {
+                volumeHundredThree.classList.add('volume-bar__active');
+            }
+        })
+        audioThree.addEventListener('ended',function() {
+            playIconThree.classList.add('fa-play');
+            playIconThree.classList.remove('fa-pause')
+        })
+        var playFour = document.querySelector('#play_4');
+        var playIconFour = document.querySelector('#icon_play_4');
+        var audioFour = document.querySelector('#audio_4');
+        var volumeUpFour = document.querySelector('#vol_up_4');
+        var volumeDownFour = document.querySelector('#vol_down_4');
+        var volumeTwentyFour = document.querySelector('#vol_20_4');
+        var volumeFourtyFour = document.querySelector('#vol_40_4');
+        var volumeSixtyFour = document.querySelector('#vol_60_4');
+        var volumeEightyFour = document.querySelector('#vol_80_4');
+        var volumeHundredFour = document.querySelector('#vol_100_4');
+        playFour.addEventListener('click',function() {
+            if (audioFour.paused) {
+                audioFour.play()
+                playIconFour.classList.remove('fa-play');
+                playIconFour.classList.add('fa-pause')
+                playIconOne.classList.add('fa-play');
+                playIconOne.classList.remove('fa-pause');
+                playIconTwo.classList.add('fa-play');
+                playIconTwo.classList.remove('fa-pause');
+                playIconThree.classList.add('fa-play');
+                playIconThree.classList.remove('fa-pause');
+                audioOne.pause()
+                audioTwo.pause()
+                audioThree.pause()
+            } else {
+                audioFour.pause()
+                playIconFour.classList.add('fa-play');
+                playIconFour.classList.remove('fa-pause')
+            }
+        })
+        volumeUpFour.addEventListener('click', function() {
+            if (audioFour.volume < 1) {
+                let audioInstance = Math.round((audioFour.volume + 0.2) * 1e8) / 1e8;
+                audioFour.volume = audioInstance
+            }
+            if (audioFour.volume === 0) {
+                volumeTwentyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.2) {
+                volumeTwentyFour.classList.add('volume-bar__active');
+                volumeFourtyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.4) {
+                volumeFourtyFour.classList.add('volume-bar__active');
+                volumeSixtyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.6) {
+                volumeSixtyFour.classList.add('volume-bar__active');
+                volumeEightyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.8) {
+                volumeEightyFour.classList.add('volume-bar__active');
+                volumeHundredFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 1) {
+                volumeHundredFour.classList.add('volume-bar__active');
+            }
+        }) 
+        volumeDownFour.addEventListener('click', function() {
+            if (audioFour.volume > 0) {
+                let audioInstance = Math.round((audioFour.volume - 0.2) * 1e8) / 1e8;
+                audioFour.volume = audioInstance
+            }
+            if (audioFour.volume === 0) {
+                volumeTwentyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.2) {
+                volumeTwentyFour.classList.add('volume-bar__active');
+                volumeFourtyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.4) {
+                volumeFourtyFour.classList.add('volume-bar__active');
+                volumeSixtyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.6) {
+                volumeSixtyFour.classList.add('volume-bar__active');
+                volumeEightyFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 0.8) {
+                volumeEightyFour.classList.add('volume-bar__active');
+                volumeHundredFour.classList.remove('volume-bar__active');
+            }
+            else if (audioFour.volume === 1) {
+                volumeHundredFour.classList.add('volume-bar__active');
+            }
+        })
+        audioFour.addEventListener('ended',function() {
+            playIconFour.classList.add('fa-play');
+            playIconFour.classList.remove('fa-pause')
+        })
+        var correctOne = document.querySelector('#input_option_1');
+        var correctTwo = document.querySelector('#input_option_2');
+        var correctThree = document.querySelector('#input_option_3');
+        var correctFour = document.querySelector('#input_option_4');
+        var correctOption = document.querySelector('#input_option');
+        var submitButton = document.querySelector('#submit_button');
+        correctOne.addEventListener('click',function() {
+            correctOption.value = 1;
+            correctOne.classList.add('highlight-option');
+            correctTwo.classList.remove('highlight-option');
+            correctThree.classList.remove('highlight-option');
+            correctFour.classList.remove('highlight-option');
+            submitButton.removeAttribute('disabled');
+            submitButton.classList.add('active-submit');
+            submitButton.classList.remove('inactive-submit');
+        })
+        correctTwo.addEventListener('click',function() {
+            correctOption.value = 2;
+            correctTwo.classList.add('highlight-option');
+            correctOne.classList.remove('highlight-option');
+            correctThree.classList.remove('highlight-option');
+            correctFour.classList.remove('highlight-option');
+            submitButton.removeAttribute('disabled');
+            submitButton.classList.add('active-submit');
+            submitButton.classList.remove('inactive-submit');
+        })
+        correctThree.addEventListener('click',function() {
+            correctOption.value = 3;
+            correctThree.classList.add('highlight-option');
+            correctOne.classList.remove('highlight-option');
+            correctTwo.classList.remove('highlight-option');
+            correctFour.classList.remove('highlight-option');
+            submitButton.removeAttribute('disabled');
+            submitButton.classList.add('active-submit');
+            submitButton.classList.remove('inactive-submit');
+        })
+        correctFour.addEventListener('click',function() {
+            correctOption.value = 4;
+            correctFour.classList.add('highlight-option');
+            correctOne.classList.remove('highlight-option');
+            correctTwo.classList.remove('highlight-option');
+            correctThree.classList.remove('highlight-option');
+            submitButton.removeAttribute('disabled');
+            submitButton.classList.add('active-submit');
+            submitButton.classList.remove('inactive-submit');
+        })
+   </script>
 
 {% endblock %}

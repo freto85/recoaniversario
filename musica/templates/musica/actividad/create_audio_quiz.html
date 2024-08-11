@@ -6,5 +6,52 @@
 {% endblock %}
 
 {% block content %}
-    
+    <div class="bigtext-container">
+        <h1 class="bigtext-title">Crear Quiz de Audio</h1>
+    </div>
+    <form class="grid-container" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <h1 class="grid-title"></h1>
+        <label for="input_title" class="grid-full input-label">Título</label>
+        <input class="input-text grid-full" type="text" name="input-title" id="input_title" placeholder="Escribir Título ..." required>
+        <label for="input_description grid-full" class="grid-full input-label">Descripción</label>
+        <textarea class="input-text grid-full"" name="input-description" id="input_description" rows="5" placeholder="Escribir Descripción ..." required></textarea>
+        <label for="audio_1" class="grid-half input-label">Audio 1</label>
+        <label for="audio_2" class="grid-half input-label">Audio 2</label>
+        <input class="input-text grid-half" type="file" name="file-1" id="audio_1" required>
+        <input class="input-text grid-half" type="file" name="file-2" id="audio_2" required>
+        <input class="input-text grid-half" type="text" name="text-1" id="text_1" placeholder="Escribir comentario ..." required>
+        <input class="input-text grid-half" type="text" name="text-2" id="text_2" placeholder="Escribir comentario ..." required>
+        <label for="audio_3" class="grid-half input-label">Audio 3</label>
+        <label for="audio_4" class="grid-half input-label">Audio 4</label>
+        <input class="input-text grid-half" type="file" name="file-3" id="audio_3" required>
+        <input class="input-text grid-half" type="file" name="file-4" id="audio_4" required>
+        <input class="input-text grid-half" type="text" name="text-3" id="text_3" placeholder="Escribir comentario ..." required>
+        <input class="input-text grid-half" type="text" name="text-4" id="text_4" placeholder="Escribir comentario ..." required>
+        <p class="grid-full input-label" for="">Respuesta Correcta</p>
+        <div class="input-text grid-half">
+            <input type="radio" id="correct_answer" name="correct-answer" value=1 required>
+            <label for="html">Audio 1</label>
+        </div>
+        <div class="input-text grid-half">
+            <input type="radio" id="html" name="correct-answer" value=2>
+            <label for="html">Audio 2</label>
+        </div>
+        <div class="input-text grid-half">
+            <input type="radio" id="html" name="correct-answer" value=3>
+            <label for="html">Audio 3</label>
+        </div>
+        <div class="input-text grid-half">
+            <input type="radio" id="html" name="correct-answer" value=4>
+            <label for="html">Audio 4</label>
+        </div>
+        <label for="input_description grid-full" class="grid-full input-label">Comentario Final</label>
+        <textarea class="input-text grid-full"" name="input-feedback" id="input_description" rows="5" placeholder="Escribir Comentario Final (Va a salir luego de elegir la opción correcta)" required></textarea>
+        <div class='buttons-container'>
+            <button type="submit"><span class='fas fa-upload'></span></button>
+            <a href="{% url 'homepage' %}"><span class='fas fa-arrow-left'></span></a>
+        </div>
+    </form>
+
 {% endblock %}
+

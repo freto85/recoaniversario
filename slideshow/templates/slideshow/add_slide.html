@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/slideshow/add_slide.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="bigtext-container">
+        <h1 class='bigtext-title'>Crear Álbum</h1>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="input_image" class="input-label">Imagen</label>
+        <input type="file" class="input-image" id="input_image" name="input-image" accept=".jpg,.jpeg,.png" required>
+        <label for="image_comment" class="input-label">Comentario</label>
+        <input type="text" class="input-text" id="input_text" name="input-text" required>
+        <div class="buttons-container">
+            <button role="submit"><span class="fa-solid fa-check"></span></button>
+            <a href="{% url 'slideshow:slidehome' pk=get_slideshow.pk %}"><span class="fa-solid fa-arrow-left"></span></a>
+        </div>
+    </form>
+{% endblock %}

@@ -5,11 +5,44 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" >
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="icon" href="{% static 'images/favicon.png' %}">
-        <title>Reco Música</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon//favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+        <link rel="mask-icon" href="{% static 'images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <title>Aniversario del Reconquista</title>
         <link rel="stylesheet" href="{% static 'css/master.css' %}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/font-awesome/fontawesome.css' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/font-awesome/solid.css' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/font-awesome/brands.css' %}"></script>
+        <style>
+            @font-face {
+                font-family: 'Sancreek';
+                src:
+                    local('Sancreek'),
+                    url('{% static 'fonts/Sancreek/Sancreek-Regular.ttf' %}') format("truetype"),
+            }
+            @font-face {
+                font-family: 'Trirong';
+                src:
+                    local('Trirong'),
+                    url('{% static 'fonts/Trirong/Trirong-Regular.ttf' %}') format("truetype"),
+            }
+            @font-face {
+                font-family: 'Patua One';
+                src:
+                    local('Patua One'),
+                    url('{% static 'fonts/Patua_One/PatuaOne-Regular.ttf' %}') format("truetype"),
+            }
+            @font-face {
+                font-family: 'Cinzel Decorative';
+                src:
+                    local('Cinzel Decorative'),
+                    url('{% static 'fonts/Cinzel_Decorative/CinzelDecorative-Regular.ttf' %}') format("truetype"),
+            }
+        </style>
         {% block head %}
         {% endblock %}
     </head>
@@ -18,7 +51,7 @@
             <header class="main-header">
                 <nav class="main-nav">
                     <a class='main-nav__brand-icon' href="/">
-                        <img src="{% static 'images/base/navbar-icon.png' %}" alt="MegaC">
+                        <img src="{% static 'images/base/bandera_virreinato.png' %}" alt="MegaC">
                     </a>
                     {% if get_user.is_superuser %}
                         <a class='nav-admin' href="{% url 'admin:index' %}">
@@ -37,16 +70,6 @@
             </header>
             {% block content %}
             {% endblock %}
-        </main>
-        <footer class='main-footer'>
-            <nav>
-                <ul class="main-footer__links">
-                    <li class='main-footer__item'>Contacto</li>
-                    <li class='main-footer__item'>Gobierno de la Ciudad de Buenos Aires</li>
-                </ul>
-            </nav>
-        </footer>
-        <script src="https://kit.fontawesome.com/afd20ee8e8.js" crossorigin="anonymous"></script>            
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+        </main>         
     </body>
 </html>

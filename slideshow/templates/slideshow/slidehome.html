@@ -7,20 +7,106 @@
 
 {% block content %}
     <div class="grid-container">
-        <div class="row-container"></div>
-        <div class="image-container">
-            <img src="{% static 'images/homepage/placeholder.png' %}" alt="" placeholder="hola">
+        <input type="hidden" id="current-pic" value="0"></input>
+        <input type="hidden" id="number-of__pics" value="{{ get_pictures|length|add:1 }}"></input>
+        <div class="grid-subcontainer grid-open" id="slideshow_0">
+            <div class="row-container"></div>
+            {% if get_user.is_superuser %}
+                <div class="admin-title__container">
+                    <p class="admin-title">{{ get_album.title }}</p>
+                    <a class="admin-title__plus" href="{% url 'slideshow:add_slide' pk=get_album.pk %}"><span class="fa-solid fa-plus"></span></a>
+                </div>
+            {% else %}
+                <p class="title-user">{{ get_album.title }}</p>
+            {% endif %}
+            <div class="image-container">
+                <img src="{{ get_album.image_field.url }}" alt="Portada">
+            </div>
+            <p class="slide-count">Cantidad de Diapositivas: <span class="slide-count__index">{{ get_pictures|length }}</span></p>
         </div>
+        {% for picture in get_pictures %}
+            <div class="grid-subcontainer" id="slideshow_{{ forloop.counter }}">
+                <div class="row-container"></div>
+                {% if get_user.is_superuser %}
+                    <div class="image-admin__container">
+                        <p class="image-comment__admin">Diapositiva {{ forloop.counter }}</p>
+                        <a class="image-remove" href="{% url 'slideshow:remove_slide' pk=picture.pk %}"><span class="fa-solid fa-trash-alt"></span></a>
+                    </div>
+                {% else %}
+                    <p class="image-comment__user">Diapositiva {{ forloop.counter }}</p>
+                {% endif %}
+                <div class="image-container">
+                    <img src="{{ picture.image_field.url }}" alt="">
+                </div>
+                <p class="slide-description">{{ picture.description|linebreaksbr|safe }}</p>
+            </div>
+        {% endfor %}
         <div class="grid-title__container">
-            <button class="grid-title__button"><span class="fa-solid fa-chevron-left"></span></button>
-            <h1 class="grid-title">Placeholder</h1>
-            <button class="grid-title__button"><span class="fa-solid fa-chevron-right"></span></button>
+            <button id="prev_button" class="grid-title__button"><span class="fa-solid fa-chevron-left"></span></button>
+            <h1 class="grid-title"></h1>
+            <button id="next_button" class="grid-title__button"><span class="fa-solid fa-chevron-right"></span></button>
         </div>
     </div>
     <div class="buttons-container">
-        {% if get_user.is_superuser %}
-            <a href="{% url 'musica:musica_start' %}"><span class="fa-solid fa-plus"></span></a>
-        {% endif %}
         <a href="{% url 'homepage' %}"><span class="fa-solid fa-house"></span></a>
     </div>
+    <script>
+        prevButton = document.querySelector("#prev_button");
+        nextButton = document.querySelector("#next_button");
+        var currentPic = document.querySelector("#current-pic").value;
+        var totalPics = document.querySelector("#number-of__pics").value;
+        var listOfPics = []
+        for (let i = 0; i < totalPics; i++) {
+            nameOfPicture = "#slideshow_" + i
+            listOfPics.push(document.querySelector(nameOfPicture));
+        }
+        nextButton.addEventListener("click", function() {
+          if (currentPic < totalPics -1) {
+              let picture = "#slideshow_" + currentPic
+              let nextPictureNumber = parseInt(currentPic) + 1
+              let nextPictureNumberTwo = nextPictureNumber.toString()
+              let nextPicture = "#slideshow_" + (nextPictureNumberTwo)
+              let closePic = document.querySelector(picture);
+              let openPic = document.querySelector(nextPicture);
+              closePic.classList.remove("grid-open");
+              openPic.classList.add("grid-open");
+              currentPic++
+          }
+          else if (currentPic == totalPics -1) {
+              let picture = "#slideshow_" + currentPic;
+              let nextPicture = "#slideshow_0"
+              let closePic = document.querySelector(picture);
+              let openPic = document.querySelector(nextPicture);
+              closePic.classList.remove("grid-open");
+              openPic.classList.add("grid-open");
+              currentPic = "0"
+          }})
+          prevButton.addEventListener("click", function() {
+          if (currentPic > 0) {
+              let picture = "#slideshow_" + currentPic
+              let prevPictureNumber = parseInt(currentPic) - 1
+              let prevPictureNumberTwo = prevPictureNumber.toString()
+              let prevPicture = "#slideshow_" + (prevPictureNumberTwo)
+              let closePic = document.querySelector(picture);
+              let openPic = document.querySelector(prevPicture);
+              closePic.classList.remove("grid-open");
+              openPic.classList.add("grid-open");
+              currentPic--
+          }
+          else if (currentPic == 0) {
+              let picture = "#slideshow_" + currentPic;
+              let prevPictureNumber = parseInt(totalPics) - 1
+              let prevPictureNumberTwo = prevPictureNumber.toString()
+              let prevPicture = "#slideshow_" + (prevPictureNumberTwo)
+              let closePic = document.querySelector(picture);
+              let openPic = document.querySelector(prevPicture);
+              console.log("Abierto Abajo")
+              console.log(openPic)
+              console.log(closePic)
+              closePic.classList.remove("grid-open");
+              openPic.classList.add("grid-open");
+              currentPic = totalPics - 1
+          }
+      });
+    </script>
 {% endblock %}

@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'musica',
-    'slideshow'
+    'slideshow',
+    'video',
+    'embed_video',
+    'bootstrap4',
+    'django_cleanup.apps.CleanupConfig',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'recoaniversario.urls'
 
-CSRF_TRUSTED_ORIGINS = ["https://5b2e-2803-9800-902a-44e5-2526-c082-fde-a3ae.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://e2a0-2803-9800-902a-44e5-7897-c33e-6e0e-c24c.ngrok-free.app","https://www.youtube.com"]
 
 TEMPLATES = [
     {
@@ -138,5 +143,17 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.template.context_processors.request',
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
+DJANGORESIZED_DEFAULT_SCALE = 0.5
+DJANGORESIZED_DEFAULT_QUALITY = 75
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+

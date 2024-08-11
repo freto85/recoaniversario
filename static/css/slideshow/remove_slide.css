@@ -1,0 +1,132 @@
+form {
+    display: flex;
+    width: 95%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem auto;
+    flex-direction: column;
+    background-color: rgb(168, 156, 135);
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+}
+
+.grid-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    color: white;
+    margin: 0rem auto 0.3rem auto;
+    background-color: #5a1a1a;
+    font-family: "Trirong", serif;
+    height: 100%;
+    text-shadow: 2px 2px #353434;
+    grid-column: span 4;
+    padding: 0.3rem 0;
+}
+
+.image-container {
+    display: flex;
+    grid-column: span 4;
+    width: 90%;
+    margin: 0.5rem auto;
+    flex-direction: column;
+    background-color: #3d2020;
+    color: rgb(205, 205, 205);
+    padding: 1rem 0 0.5rem 0;
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+}
+
+.image-size {
+    border: 5px inset grey;
+    width: 100%;
+}
+
+.icon-text {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0.8rem auto 0.6rem auto;
+    font-size: 1.2rem;
+    font-family: "Patua One", serif;
+}
+
+.buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.buttons-container a,
+.buttons-container button {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    margin: 0.5rem auto 1rem auto;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+    padding: 0.5rem;
+    height: 3.5rem;
+    color: rgb(205, 205, 205);
+    font-family: "Patua One", serif;
+    text-shadow: 2px 2px #353434;
+    border: 0;
+}
+
+.back-button {
+    background-color: #562d2d;
+}
+
+.submit-button {
+    background-color: rgb(0, 124, 2);
+}
+
+.back-button:hover,
+.back-button:active {
+    background-color: rgb(106, 62, 62);
+}
+
+.submit-button:hover,
+.submit-button:active {
+    background-color: rgb(2, 158, 5);
+}
+
+@media (min-width:40rem) {
+    form {
+        width: 60%;
+    }
+    .grid-title {
+        font-size: 1.8rem;
+    }
+    .icon-size {
+        font-size: 12rem;
+        padding: 0.5rem 0;
+    }
+    
+    .icon-text {
+        font-size: 1.4rem;
+    }
+    .buttons-container a,
+    .buttons-container button {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width:80rem) {
+    form {
+        width: 40%;
+    }
+    .grid-title {
+        font-size: 2rem;
+    }
+    .icon-container {
+        width: 60%;
+        padding: 1rem 0 1rem 0;
+    }
+
+}

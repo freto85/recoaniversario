@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/slideshow/edit_slideshow.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="bigtext-container">
+        <h1 class='bigtext-title'>Editar Album</h1>
+    </div>
+    <form enctype="multipart/form-data" method="POST" style='font-size:1.5em;'>
+        {% csrf_token %}
+        {% bootstrap_form get_form %}
+        {{ get_form.media }} 
+        {% buttons %}
+        <div class='buttons-container'>
+            <button type="submit"><span class='fas fa-upload'></span></button>
+            <a href="{% url 'homepage' %}"><span class='fas fa-arrow-left'></span></a>
+        </div>		
+        {% endbuttons %}
+    </form>
+{% endblock %}

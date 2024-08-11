@@ -7,15 +7,57 @@
 
 {% block content %}
     <div class="bigtext-container">
-        <h1 class='bigtext-title'>Marcha por Buenos Aires</h1>
+        <h1 class='bigtext-title'>Sala 3</h1>
     </div>
     {% if get_user.is_authenticated %}
         <div class="grid-container">
             <div class="grid-title">Menú Principal</div>
-            <a class="menu-button" href="{% url 'slideshow:slidehome' %}">Introducción</a>
-            <a class="menu-button" href="{% url 'musica:musica_start' %}">Actividad</a>
+            {% if get_slideshow|length > 0 %}
+                <p class="grid-subtitle">Diapositivas</p>
+                {% for slideshow in get_slideshow %}
+                    {% if get_user.is_superuser %}
+                        <div class="admin-menu__container">
+                            <a class="admin-menu__button" href="{% url 'slideshow:slidehome' pk=slideshow.pk %}">{{ slideshow.title }}</a>
+                            <a class="admin-edit__button" href="{% url 'slideshow:edit_slideshow' pk=slideshow.pk %}"><span class="fa-solid fa-edit"></span></a>
+                            <a class="admin-remove__button" href="{% url 'slideshow:remove_slideshow' pk=slideshow.pk %}"><span class="fa-solid fa-trash-alt"></span></a>
+                        </div>
+                    {% else %}
+                        <a class="menu-button" href="{% url 'slideshow:slidehome' pk=slideshow.pk %}">{{ slideshow.title }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if get_quiz|length > 0 %}
+                <p class="grid-subtitle">Juego</p>
+                {% for quiz in get_quiz %}
+                    {% if get_user.is_superuser %}
+                        <div class="admin-menu__container">
+                            <a class="admin-menu__button" href="{% url 'musica:musica_start' pk=quiz.pk %}">{{ quiz.title }}</a>
+                            <a class="admin-edit__button" href="{% url 'musica:edit_quiz' pk=quiz.pk %}"><span class="fa-solid fa-edit"></span></a>
+                            <a class="admin-remove__button" href="{% url 'musica:remove_quiz' pk=quiz.pk %}"><span class="fa-solid fa-trash-alt"></span></a>
+                        </div>
+                    {% else %}
+                        <a class="menu-button" href="{% url 'musica:musica_start' pk=quiz.pk %}">{{ quiz.title }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if get_video|length > 0 %}
+                <p class="grid-subtitle">Coreografía</p>
+                {% for video in get_video %}
+                    {% if get_user.is_superuser %}
+                        <div class="admin-menu__container">
+                            <a class="admin-menu__button" href="{% url 'video:video_detail' pk=video.pk %}">{{ video.title }}</a>
+                            <a class="admin-edit__button" href="{% url 'video:edit_video' pk=video.pk %}"><span class="fa-solid fa-edit"></span></a>
+                            <a class="admin-remove__button" href="{% url 'video:remove_video' pk=video.pk %}"><span class="fa-solid fa-trash-alt"></span></a>
+                        </div>
+                    {% else %}
+                        <a class="menu-button" href="{% url 'video:video_detail' pk=video.pk %}">{{ video.title }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             {% if get_user.is_superuser %}
+                <p class="grid-subtitle">Panel de Control</p>
                 <a class="admin-button" href="{% url 'slideshow:create_slideshow' %}">Crear Diapositivas</a>
+                <a class="admin-button" href="{% url 'video:create_video' %}">Crear Videos</a>
                 <a class="admin-button" href="{% url 'musica:create_audio_quiz' %}">Crear Quiz de Audio</a>
             {% endif %}
         </div>

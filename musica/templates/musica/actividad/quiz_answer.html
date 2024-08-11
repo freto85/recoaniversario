@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/musica/actividad/quiz_answer.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="bigtext-container">
+        <h1 class="bigtext-title">{% if get_option == "correcta" %}¡Felicitaciones!{% else %}¡Incorrecto!{% endif %}</h1>
+    </div>
+    <div class="image-container">
+        {% if get_option == "correcta" %}
+            <img src="{% static 'images/espia-atrapado.jpg' %}" alt="" placeholder="INSERTAR IMAGEN CORRECTA">
+            <p class="text-message">¡Atrapaste al espía!¡Bien hecho!</p>
+        {% else %}
+            <img src="{% static 'images/redcoat-escape.jpg' %}" alt="" placeholder="INSERTAR IMAGEN CORRECTA">
+            <p class="text-message">¡Dejaste al espía escapar!</p>
+        {% endif %}
+            <p class="text-feedback">{{ get_quiz.feedback|safe|linebreaksbr }}</p>
+    </div>
+    <div class="buttons-container">
+        <a href="{% url 'homepage' %}"><span class="fa-solid fa-house"></span></a>
+    </div>
+{% endblock %}

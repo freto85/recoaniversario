@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/musica/actividad/remove_quiz.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="bigtext-container">
+        <h1 class='bigtext-title'>Eliminar Actividad</h1>
+    </div>
+    <form class="grid-container" method="post">
+        <h1 class='grid-title'>¿Estás Seguro?</h1>
+        {% csrf_token %}
+        <div class="icon-container">
+            <span class="icon-size fa-solid fa-trash"></span>
+            <p class="icon-text">{{ get_quiz.title }}</p>
+        </div>
+        <div class="buttons-container">
+            <button class="submit-button" type="submit"><span class="fa-solid fa-trash-alt"></span></button>
+            <a class="back-button" href="{% url 'homepage' %}"><span class="fa-solid fa-house"></span></a>
+        </div>
+    </form>
+{% endblock %}

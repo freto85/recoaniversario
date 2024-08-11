@@ -1,0 +1,101 @@
+form {
+    display: flex;
+    width: 95%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem auto;
+    flex-direction: column;
+    background-color: rgb(168, 156, 135);
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+}
+
+.input-image {
+    display: flex;
+    width: 95%;
+    margin: 0.3rem auto;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+}
+
+.input-text {
+    display: flex;
+    width: 95%;
+    margin: 0.3rem auto;
+    padding: 0.2rem 0.5rem;
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+label {
+    color: white;
+    display: flex;
+    width: 95%;
+    margin: 0.2rem auto 0 auto;
+    padding: 0.2rem 0;
+    font-size: 1.1rem;
+    font-family: "Trirong", serif;
+    text-shadow: 1px 1px #353434;
+}
+
+.buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.buttons-container a,
+.buttons-container button {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    margin: 0.5rem auto 1rem auto;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: rgb(86, 45, 45);
+    box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.3);
+    padding: 0.4rem;
+    color: rgb(205, 205, 205);
+    font-family: "Patua One", serif;
+    text-shadow: 2px 2px #353434;
+    border: 0;
+}
+
+@media (min-width: 40rem) {
+    form {
+        width: 60%;
+        box-shadow: 3px 3px 5px 3px rgba(0,0,0,0.3);
+    }
+    label {
+        font-size: 1.3rem;
+    }
+
+    .buttons-container {
+        width: 100%;
+        margin: 1.5rem auto 0.5rem auto;
+    }
+
+    .buttons-container a,
+    .buttons-container button {
+        font-size: 1.4rem;
+        width: 30%;
+    }
+}
+
+@media (min-width: 80rem) {
+    form {
+        width: 40%;
+        margin-top: 1rem;
+    }
+    label {
+        font-size: 1.5rem;
+    }
+    .buttons-container a,
+    .buttons-container button {
+        font-size: 1.8rem;
+        width: 30%;
+    }
+}
